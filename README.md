@@ -4,6 +4,7 @@ Collection of functions and aliases for ROS2 development
 # Prerequisites
 
 [fzf](https://github.com/junegunn/fzf#installation)
+For Ubuntu simply: `sudo apt-get install fzf`. For more install options refer to the documentation
 
 # Usage
 
