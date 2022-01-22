@@ -1,6 +1,8 @@
 # ros2-aliases
 Collection of functions and aliases for ROS2 development
 
+![](https://github.com/tonynajjar/ros2-aliases/blob/main/usage.gif)
+
 # Prerequisites
 
 - [fzf](https://github.com/junegunn/fzf#installation)
@@ -8,9 +10,12 @@ For Ubuntu simply: `sudo apt-get install fzf`. For more install options refer to
 
 - Bash. Zsh is not yet supported
 
-# Usage
+# Installation
 
-![](https://github.com/tonynajjar/ros2-aliases/blob/main/usage.gif)
+- Clone the repo: `git clone https://github.com/tonynajjar/ros2-aliases ~/ros2-aliases`
+- Add ros2_utils.bash to your bashrc: `echo 'source ~/ros2-aliases/ros2_utils.bash ' >> ~/.bashrc`
+
+# Usage
 
 ## Topics
 
