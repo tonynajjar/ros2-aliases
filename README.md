@@ -1,2 +1,41 @@
 # ros2-aliases
 Collection of functions and aliases for ROS2 development
+
+# Prerequisites
+
+[fzf](https://github.com/junegunn/fzf#installation)
+
+# Usage
+
+## Topics
+
+| Command | Alias |
+| --- | --- |
+| `ros2 topic list` | `rtlist` |
+| `ros2 topic echo` | `rtecho`|
+| `ros2 topic info` | `rtinfo`|
+
+## Nodes
+
+| Command | Alias |
+| --- | --- |
+| `ros2 node list` | `rnlist` |
+| `ros2 node info` | `rninfo`|
+| Killing a node | `rnkill`|
+
+`rnkill` is a prototype and might not work as intended. It is an attempt to emulate ROS1's `rosnode kill`
+
+## TF
+
+| Command | Alias | Arguments |
+| --- | --- | --- |
+| `ros2 run tf2_tools view_frames` | `view_frames` | namespace of TF topic [Optional] |
+| `ros2 run tf2_ros tf2_echo` | `tf2_echo`| frame 1 [Required], frame 2 [Required], namespace of TF topic [Optional] |
+
+## Colcon
+
+| Command | Alias | Arguments |
+| --- | --- | --- |
+| `colcon build --symlink-install` | `cb` |
+| `colcon build --symlink-install --packages-select` | `cb`| package 1 [Required] ... package n [Optional] |
+
