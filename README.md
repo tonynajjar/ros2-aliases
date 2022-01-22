@@ -10,6 +10,8 @@ For Ubuntu simply: `sudo apt-get install fzf`. For more install options refer to
 
 # Usage
 
+![](https://github.com/tonynajjar/ros2-aliases/blob/main/usage.gif)
+
 ## Topics
 
 | Command | Alias |
