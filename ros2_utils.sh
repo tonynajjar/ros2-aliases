@@ -113,8 +113,3 @@ function cb {
     history -s cb $@
     history -s $CMD
 }
-
-# Directories aliases
-
-alias roscd="cd /code/ros2_ws/src"
-alias deepcd="cd /data/workspace/deep_cv"
