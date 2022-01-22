@@ -21,7 +21,7 @@ function rtecho {
 
 function rtinfo {
     TOPIC=$(ros2 topic list | fzf)
-    CMD="ros2 topic info -v $TOPIC | sed '/GID/d;/Deadline/d;/Liveliness/d;/Endpoint/d;/Lifespan/d'"
+    CMD="ros2 topic info -v $TOPIC"
     echo $CMD
     $CMD
     history -s rtinfo
@@ -74,6 +74,7 @@ function rnkill {
 }
 
 # TF
+
 function view_frames {
     if [ $# -eq 0 ]; then
         REMAP=""
@@ -104,9 +105,9 @@ function tf_echo {
 
 function cb {
     if [ $# -eq 0 ]; then
-        CMD="colcon build"
+        CMD="colcon build --symlink-install"
     else
-        CMD="colcon build --packages-select $@"
+        CMD="colcon build --symlink-install --packages-select $@"
     fi
     echo $CMD
     $CMD
