@@ -54,3 +54,9 @@ Zsh:
 | `colcon build --symlink-install` | `cb` |
 | `colcon build --symlink-install --packages-select` | `cb`| package 1 [Required] ... package n [Optional] |
 
+## Rosdep
+
+
+| Command | Alias |
+| --- | --- |
+| `rosdep install --from-paths src --ignore-src -r` | `rosdep_install` |

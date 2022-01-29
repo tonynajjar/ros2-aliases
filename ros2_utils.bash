@@ -114,3 +114,13 @@ function cb {
     history -s cb $@
     history -s $CMD
 }
+
+# Rosdep
+
+function rosdep_install {
+    CMD="rosdep install --from-paths src --ignore-src -r"
+    echo $CMD
+    $CMD
+    history -s rosdep_install
+    history -s $CMD
+}

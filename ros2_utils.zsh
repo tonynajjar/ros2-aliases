@@ -109,3 +109,11 @@ function cb {
     fi
     print -s cb $@
 }
+
+# Rosdep
+
+function rosdep_install {
+    echo "rosdep install --from-paths src --ignore-src -r"
+    rosdep install --from-paths src --ignore-src -r
+    print -s rosdep_install
+}
