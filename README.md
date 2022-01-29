@@ -8,12 +8,17 @@ Collection of functions and aliases for ROS2 development
 - [fzf](https://github.com/junegunn/fzf#installation)
 For Ubuntu simply: `sudo apt-get install fzf`. For more install options refer to the documentation
 
-- Bash. Zsh is not yet supported
+- Bash or Zsh
 
 # Installation
 
 - Clone the repo: `git clone https://github.com/tonynajjar/ros2-aliases ~/ros2-aliases`
-- Add ros2_utils.bash to your bashrc: `echo 'source ~/ros2-aliases/ros2_utils.bash ' >> ~/.bashrc`
+
+Bash:
+- Add ros2_utils.bash to your bashrc: `echo 'source ~/ros2-aliases/ros2_utils.bash' >> ~/.bashrc`
+
+Zsh:
+- Add ros2_utils.zsh to your zshrc: `echo 'source ~/ros2-aliases/ros2_utils.zsh' >> ~/.zshrc`
 
 # Usage
 
