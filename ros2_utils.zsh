@@ -47,6 +47,16 @@ function rninfo {
     print -s $CMD
 }
 
+# Services
+
+function rslist {
+    CMD="ros2 service list"
+    echo $CMD
+    $CMD
+    history -s rslist
+    history -s $CMD
+}
+
 # TODO: Not working
 function rnkill {
     NODE_TO_KILL_RAW=$(ros2 node list | fzf)
