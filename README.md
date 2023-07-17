@@ -6,7 +6,7 @@ Collection of functions and aliases for ROS2 development
 # Prerequisites
 
 - [fzf](https://github.com/junegunn/fzf#installation)
-For Ubuntu simply: `sudo apt-get install fzf`. For more install options refer to the documentation
+For Ubuntu simply: `sudo apt install fzf`. For more install options refer to the documentation
 
 - Bash or Zsh
 
@@ -40,6 +40,20 @@ Zsh:
 
 `rnkill` is a prototype and might not work as intended. It is an attempt to emulate ROS1's `rosnode kill`
 
+## Services
+
+| Command | Alias |
+| --- | --- |
+| `ros2 service list` | `rslist` |
+
+## Parameters
+
+| Command | Alias |
+| --- | --- |
+| `ros2 param list` | `rplist` |
+| `ros2 param get`  | `rpget`|
+| `ros2 param set`  | `rpset`|
+
 ## TF
 
 | Command | Alias | Arguments |
@@ -55,7 +69,6 @@ Zsh:
 | `colcon build --symlink-install --packages-select` | `cb`| package 1 [Required] ... package n [Optional] |
 
 ## Rosdep
-
 
 | Command | Alias |
 | --- | --- |
