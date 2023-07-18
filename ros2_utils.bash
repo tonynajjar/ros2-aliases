@@ -81,7 +81,7 @@ function rpget {
 function rpset {
     NODE=$(ros2 node list | fzf)
     PARAM=$(ros2 param list $NODE | fzf)
-    echo -n value: 
+    echo -n "value: "
     read VALUE
     CMD="ros2 param set $NODE $PARAM $VALUE"
     echo $CMD
