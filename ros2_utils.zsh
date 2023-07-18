@@ -57,6 +57,39 @@ function rslist {
     history -s $CMD
 }
 
+# Parameters
+
+function rplist {
+    NODE=$(ros2 node list | fzf)
+    CMD="ros2 param list $NODE --param-type"
+    echo $CMD
+    $CMD
+    history -s rplist
+    history -s $CMD
+}
+
+function rpget {
+    NODE=$(ros2 node list | fzf)
+    PARAM=$(ros2 param list $NODE | fzf)
+    CMD="ros2 param get $NODE $PARAM"
+    echo $CMD
+    $CMD
+    history -s rpget
+    history -s $CMD
+}
+
+function rpset {
+    NODE=$(ros2 node list | fzf)
+    PARAM=$(ros2 param list $NODE | fzf)
+    echo -n "value: "
+    read VALUE
+    CMD="ros2 param set $NODE $PARAM $VALUE"
+    echo $CMD
+    $CMD
+    history -s rpset
+    history -s $CMD
+}
+
 # TODO: Not working
 function rnkill {
     NODE_TO_KILL_RAW=$(ros2 node list | fzf)
