@@ -156,7 +156,7 @@ function cb {
 # Rosdep
 
 function rosdep_install {
-    echo "rosdep install --from-paths src --ignore-src -r"
-    rosdep install --from-paths src --ignore-src -r
+    echo "rosdep install --from-paths src --ignore-src -r -y"
+    rosdep install --from-paths src --ignore-src -r -y
     print -s rosdep_install
 }

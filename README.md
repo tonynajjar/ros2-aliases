@@ -72,4 +72,4 @@ Zsh:
 
 | Command | Alias |
 | --- | --- |
-| `rosdep install --from-paths src --ignore-src -r` | `rosdep_install` |
+| `rosdep install --from-paths src --ignore-src -r -y` | `rosdep_install` |

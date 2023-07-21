@@ -160,7 +160,7 @@ function cb {
 # Rosdep
 
 function rosdep_install {
-    CMD="rosdep install --from-paths src --ignore-src -r"
+    CMD="rosdep install --from-paths src --ignore-src -r -y"
     echo $CMD
     $CMD
     history -s rosdep_install
