@@ -1,5 +1,27 @@
 #!/usr/bin/env zsh
 
+# ROS 2 run
+
+function rrun {
+  if [ $# -eq 0 ]; then
+    PKG_NAME=$(ros2 pkg list | fzf)
+    if [ -z $PKG_NAME ]; then
+      return
+    fi
+    rrun $PKG_NAME
+  elif [ $# -eq 1 ]; then
+    PKG_AND_EXE=$(ros2 pkg executables | grep $1 | fzf)
+    if [ -z $PKG_AND_EXE ]; then
+      return
+    fi
+    CMD=(ros2 run $PKG_AND_EXE)
+    echo $CMD
+    eval $CMD
+    print -s rrun $1
+    print -s $CMD
+  fi
+}
+
 # Topics
 
 function rtlist {
