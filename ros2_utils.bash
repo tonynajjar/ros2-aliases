@@ -5,19 +5,15 @@
 function rrun {
   if [ $# -eq 0 ]; then
     PKG_NAME=$(ros2 pkg list | fzf)
-    if [ -z $PKG_NAME ]; then
-      return
-    fi
+    [[ -z "$PKG_NAME" ]] && return
+    history -s "rrun $PKG_NAME"
     rrun $PKG_NAME
   elif [ $# -eq 1 ]; then
     PKG_AND_EXE=$(ros2 pkg executables | grep $1 | fzf)
-    if [ -z "$PKG_AND_EXE" ]; then
-      return
-    fi
+    [[ -z "$PKG_AND_EXE" ]] && return
     CMD="ros2 run $PKG_AND_EXE"
     echo "$CMD"
     $CMD
-    history -s "rrun $1"
     history -s $CMD
   fi
 }
