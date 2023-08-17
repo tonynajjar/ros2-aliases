@@ -14,6 +14,7 @@ function rrun {
     CMD="ros2 run $PKG_AND_EXE"
     echo "$CMD"
     $CMD
+    history -s rnrun
     history -s $CMD
   fi
 }
