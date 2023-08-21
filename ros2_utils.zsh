@@ -53,11 +53,11 @@ function rninfo {
 # Services
 
 function rslist {
-    CMD="ros2 service list"
+    CMD=(ros2 service list)
     echo $CMD
     $CMD
-    history -s rslist
-    history -s $CMD
+    print -s rslist
+    print -s $CMD
 }
 
 # Parameters
@@ -65,11 +65,11 @@ function rslist {
 function rplist {
     NODE=$(ros2 node list | fzf)
     [[ -z "$NODE" ]] && return
-    CMD="ros2 param list $NODE --param-type"
+    CMD=(ros2 param list $NODE --param-type)
     echo $CMD
     $CMD
-    history -s rplist
-    history -s $CMD
+    print -s rplist
+    print -s $CMD
 }
 
 function rpget {
@@ -77,11 +77,11 @@ function rpget {
     [[ -z "$NODE" ]] && return
     PARAM=$(ros2 param list $NODE | fzf)
     [[ -z "$PARAM" ]] && return
-    CMD="ros2 param get $NODE $PARAM"
+    CMD=(ros2 param get $NODE $PARAM)
     echo $CMD
     $CMD
-    history -s rpget
-    history -s $CMD
+    print -s rpget
+    print -s $CMD
 }
 
 function rpset {
@@ -91,11 +91,11 @@ function rpset {
     [[ -z "$PARAM" ]] && return
     echo -n "value: "
     read VALUE
-    CMD="ros2 param set $NODE $PARAM $VALUE"
+    CMD=(ros2 param set $NODE $PARAM $VALUE)
     echo $CMD
     $CMD
-    history -s rpset
-    history -s $CMD
+    print -s rpset
+    print -s $CMD
 }
 
 # TODO: Not working
