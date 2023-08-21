@@ -22,6 +22,12 @@ Zsh:
 
 # Usage
 
+## Executable
+
+| Command | Alias |
+| --- | --- |
+| `ros2 run` | `rrun` |
+
 ## Topics
 
 | Command | Alias |
