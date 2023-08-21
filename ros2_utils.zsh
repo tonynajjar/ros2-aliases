@@ -31,6 +31,7 @@ function rtlist {
 
 function rtecho {
     TOPIC=$(ros2 topic list | fzf)
+    [[ -z "$TOPIC" ]] && return
     CMD=(ros2 topic echo $TOPIC)
     echo $CMD
     $CMD
@@ -40,6 +41,7 @@ function rtecho {
 
 function rtinfo {
     TOPIC=$(ros2 topic list | fzf)
+    [[ -z "$TOPIC" ]] && return
     CMD=(ros2 topic info -v $TOPIC)
     echo $CMD
     $CMD
@@ -59,6 +61,7 @@ function rnlist {
 
 function rninfo {
     NODE=$(ros2 node list | fzf)
+    [[ -z "$NODE" ]] && return
     CMD=(ros2 node info $NODE)
     echo $CMD
     $CMD
@@ -69,49 +72,55 @@ function rninfo {
 # Services
 
 function rslist {
-    CMD="ros2 service list"
+    CMD=(ros2 service list)
     echo $CMD
     $CMD
-    history -s rslist
-    history -s $CMD
+    print -s rslist
+    print -s $CMD
 }
 
 # Parameters
 
 function rplist {
     NODE=$(ros2 node list | fzf)
-    CMD="ros2 param list $NODE --param-type"
+    [[ -z "$NODE" ]] && return
+    CMD=(ros2 param list $NODE --param-type)
     echo $CMD
     $CMD
-    history -s rplist
-    history -s $CMD
+    print -s rplist
+    print -s $CMD
 }
 
 function rpget {
     NODE=$(ros2 node list | fzf)
+    [[ -z "$NODE" ]] && return
     PARAM=$(ros2 param list $NODE | fzf)
-    CMD="ros2 param get $NODE $PARAM"
+    [[ -z "$PARAM" ]] && return
+    CMD=(ros2 param get $NODE $PARAM)
     echo $CMD
     $CMD
-    history -s rpget
-    history -s $CMD
+    print -s rpget
+    print -s $CMD
 }
 
 function rpset {
     NODE=$(ros2 node list | fzf)
+    [[ -z "$NODE" ]] && return
     PARAM=$(ros2 param list $NODE | fzf)
+    [[ -z "$PARAM" ]] && return
     echo -n "value: "
     read VALUE
-    CMD="ros2 param set $NODE $PARAM $VALUE"
+    CMD=(ros2 param set $NODE $PARAM $VALUE)
     echo $CMD
     $CMD
-    history -s rpset
-    history -s $CMD
+    print -s rpset
+    print -s $CMD
 }
 
 # TODO: Not working
 function rnkill {
     NODE_TO_KILL_RAW=$(ros2 node list | fzf)
+    [[ -z "$NODE_TO_KILL_RAW" ]] && return
     NODE_TO_KILL=(${NODE_TO_KILL_RAW//// })
     NODE_TO_KILL=${NODE_TO_KILL[-1]} # extract last word from node name
     NODE_TO_KILL=[${NODE_TO_KILL:0:1}]${NODE_TO_KILL:1}

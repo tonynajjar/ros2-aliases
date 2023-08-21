@@ -31,6 +31,7 @@ function rtlist {
 
 function rtecho {
     TOPIC=$(ros2 topic list | fzf)
+    [[ -z "$TOPIC" ]] && return
     CMD="ros2 topic echo $TOPIC"
     echo $CMD
     $CMD
@@ -40,6 +41,7 @@ function rtecho {
 
 function rtinfo {
     TOPIC=$(ros2 topic list | fzf)
+    [[ -z "$TOPIC" ]] && return
     CMD="ros2 topic info -v $TOPIC"
     echo $CMD
     $CMD
@@ -59,6 +61,7 @@ function rnlist {
 
 function rninfo {
     NODE=$(ros2 node list | fzf)
+    [[ -z "$NODE" ]] && return
     CMD="ros2 node info $NODE"
     echo $CMD
     $CMD
@@ -80,6 +83,7 @@ function rslist {
 
 function rplist {
     NODE=$(ros2 node list | fzf)
+    [[ -z "$NODE" ]] && return
     CMD="ros2 param list $NODE --param-type"
     echo $CMD
     $CMD
@@ -89,7 +93,9 @@ function rplist {
 
 function rpget {
     NODE=$(ros2 node list | fzf)
+    [[ -z "$NODE" ]] && return
     PARAM=$(ros2 param list $NODE | fzf)
+    [[ -z "$PARAM" ]] && return
     CMD="ros2 param get $NODE $PARAM"
     echo $CMD
     $CMD
@@ -99,7 +105,9 @@ function rpget {
 
 function rpset {
     NODE=$(ros2 node list | fzf)
+    [[ -z "$NODE" ]] && return
     PARAM=$(ros2 param list $NODE | fzf)
+    [[ -z "$PARAM" ]] && return
     echo -n "value: "
     read VALUE
     CMD="ros2 param set $NODE $PARAM $VALUE"
@@ -111,6 +119,7 @@ function rpset {
 
 function rnkill {
     NODE_TO_KILL_RAW=$(ros2 node list | fzf)
+    [[ -z "$NODE_TO_KILL_RAW" ]] && return
     NODE_TO_KILL=(${NODE_TO_KILL_RAW//// })
     NODE_TO_KILL=${NODE_TO_KILL[-1]} # extract last word from node name
     NODE_TO_KILL=[${NODE_TO_KILL:0:1}]${NODE_TO_KILL:1}
