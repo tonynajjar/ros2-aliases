@@ -2,11 +2,11 @@
 
 # ROS 2 run
 
-function rnrun {
+function rrun {
   if [ $# -eq 0 ]; then
     PKG_NAME=$(ros2 pkg list | fzf)
     [[ -z "$PKG_NAME" ]] && return
-    print -s rnrun $PKG_NAME
+    print -s rrun $PKG_NAME
     rrun $PKG_NAME
   elif [ $# -eq 1 ]; then
     PKG_AND_EXE=$(ros2 pkg executables | grep $1 | fzf)
@@ -14,7 +14,7 @@ function rnrun {
     CMD=(ros2 run $PKG_AND_EXE)
     echo $CMD
     eval $CMD
-    print -s rnrun
+    print -s rrun
     print -s $CMD
   fi
 }
