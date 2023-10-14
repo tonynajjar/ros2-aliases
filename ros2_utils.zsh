@@ -117,6 +117,18 @@ function rpset {
     print -s $CMD
 }
 
+# Interface
+
+function rishow {
+  local INTERFACE=$(ros2 interface list | fzf | sed 's/ //g')
+  [[ -z "$INTERFACE" ]] && return
+  CMD="ros2 interface show $INTERFACE"
+  echo $CMD
+  $CMD
+  print -s rishow
+  print -s $CMD
+}
+
 # TODO: Not working
 function rnkill {
     NODE_TO_KILL_RAW=$(ros2 node list | fzf)

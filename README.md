@@ -60,6 +60,12 @@ Zsh:
 | `ros2 param get`  | `rpget`|
 | `ros2 param set`  | `rpset`|
 
+## Interface
+
+| Command | Alias |
+| --- | --- |
+| `ros2 interface show`  | `rishow`|
+
 ## TF
 
 | Command | Alias | Arguments |
