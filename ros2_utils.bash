@@ -69,6 +69,32 @@ function rninfo {
     history -s $CMD
 }
 
+function rnkill {
+    NODE_TO_KILL_RAW=$(ros2 node list | fzf)
+    [[ -z "$NODE_TO_KILL_RAW" ]] && return
+    NODE_TO_KILL=(${NODE_TO_KILL_RAW//// })
+    NODE_TO_KILL=${NODE_TO_KILL[-1]} # extract last word from node name
+    NODE_TO_KILL=[${NODE_TO_KILL:0:1}]${NODE_TO_KILL:1}
+    # The method used is to parse the PID and use kill <PID>.
+    # If more than 1 PID is found, we abort to avoid killing other processes.
+    # The parsing checks for any process with the string [/]$NODE_TO_KILL.
+    # This can probably be optimized to always find the one node we are looking for.
+    PROC_NB=$(ps aux | grep [/]$NODE_TO_KILL | wc -l)
+    if [ $PROC_NB -gt 1 ]; then
+        echo "This node name matched with more than 1 process. Not killing"
+        return
+    elif [ $PROC_NB -eq 0 ]; then
+        echo "No processes found matching this node name"
+        return
+    fi
+    PROC_PID=$(ps aux | grep [/]$NODE_TO_KILL | awk '{print $2}')
+    CMD="kill $PROC_PID"
+    echo "Killing $NODE_TO_KILL_RAW with PID $PROC_PID"
+    $CMD
+    history -s rnlist
+    history -s $CMD
+}
+
 # Services
 
 function rslist {
@@ -127,32 +153,6 @@ function rishow {
   $CMD
   history -s rishow
   history -s $CMD
-}
-
-function rnkill {
-    NODE_TO_KILL_RAW=$(ros2 node list | fzf)
-    [[ -z "$NODE_TO_KILL_RAW" ]] && return
-    NODE_TO_KILL=(${NODE_TO_KILL_RAW//// })
-    NODE_TO_KILL=${NODE_TO_KILL[-1]} # extract last word from node name
-    NODE_TO_KILL=[${NODE_TO_KILL:0:1}]${NODE_TO_KILL:1}
-    # The method used is to parse the PID and use kill <PID>.
-    # If more than 1 PID is found, we abort to avoid killing other processes.
-    # The parsing checks for any process with the string [/]$NODE_TO_KILL.
-    # This can probably be optimized to always find the one node we are looking for.
-    PROC_NB=$(ps aux | grep [/]$NODE_TO_KILL | wc -l)
-    if [ $PROC_NB -gt 1 ]; then
-        echo "This node name matched with more than 1 process. Not killing"
-        return
-    elif [ $PROC_NB -eq 0 ]; then
-        echo "No processes found matching this node name"
-        return
-    fi
-    PROC_PID=$(ps aux | grep [/]$NODE_TO_KILL | awk '{print $2}')
-    CMD="kill $PROC_PID"
-    echo "Killing $NODE_TO_KILL_RAW with PID $PROC_PID"
-    $CMD
-    history -s rnlist
-    history -s $CMD
 }
 
 # TF
