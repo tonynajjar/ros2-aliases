@@ -72,7 +72,8 @@ Zsh:
 | Command | Alias | Arguments |
 | --- | --- | --- |
 | `colcon build --symlink-install` | `cb` |
-| `colcon build --symlink-install --packages-select` | `cb`| package 1 [Required] ... package n [Optional] |
+| `colcon build --symlink-install --packages-select` | `cbp`| package 1 [Optional] ... package n [Optional] |
+| `colcon list` | `cl` |
 
 ## Rosdep
 

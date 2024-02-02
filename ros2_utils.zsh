@@ -173,12 +173,33 @@ function tf_echo {
 # Colcon
 
 function cb {
+    CMD=(colcon build --symlink-install)
+    echo $CMD
+    $CMD
+    print -s cb
+    print -s $CMD
+}
+
+function cbp {
     if [ $# -eq 0 ]; then
-        colcon build --symlink-install
+        PACKAGE=$(colcon list -n | fzf)
+        [[ -z "$PACKAGE" ]] && return
+        CMD="colcon build --symlink-install --packages-select $PACKAGE"
     else
-        colcon build --symlink-install --packages-select $@
+        CMD="colcon build --symlink-install --packages-select $@"
     fi
-    print -s cb $@
+    echo $CMD
+    eval $CMD
+    print -s cbp $@
+    print -s $CMD
+}
+
+function cl {
+    CMD=(colcon list -n)
+    echo $CMD
+    $CMD
+    print -s cl
+    print -s $CMD
 }
 
 # Rosdep
