@@ -186,14 +186,32 @@ function tf_echo {
 # Colcon
 
 function cb {
+    CMD="colcon build --symlink-install"
+    echo $CMD
+    $CMD
+    history -s cb $@
+    history -s $CMD
+}
+
+function cbp {
     if [ $# -eq 0 ]; then
-        local CMD="colcon build --symlink-install"
+        PACKAGE=$(colcon list -n | fzf)
+        [[ -z "$PACKAGE" ]] && return
+        local CMD="colcon build --symlink-install --packages-select $PACKAGE"
     else
         local CMD="colcon build --symlink-install --packages-select $@"
     fi
     echo $CMD
     $CMD
-    history -s cb $@
+    history -s cbp $@
+    history -s $CMD
+}
+
+function cl {
+    CMD="colcon list -n"
+    echo $CMD
+    $CMD
+    history -s cl $@
     history -s $CMD
 }
 
