@@ -146,7 +146,7 @@ function rpset {
 # Interface
 
 function rishow {
-  local INTERFACE=$(ros2 interface list | fzf | sed 's/ //g')
+  local INTERFACE=$(ros2 interface list | fzf)
   [[ -z "$INTERFACE" ]] && return
   local CMD="ros2 interface show $INTERFACE"
   echo $CMD
