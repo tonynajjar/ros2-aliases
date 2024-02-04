@@ -4,14 +4,14 @@
 
 function rrun {
   if [ $# -eq 0 ]; then
-    PKG_NAME=$(ros2 pkg list | fzf)
+    local PKG_NAME=$(ros2 pkg list | fzf)
     [[ -z "$PKG_NAME" ]] && return
     print -s rrun $PKG_NAME
     rrun $PKG_NAME
   elif [ $# -eq 1 ]; then
-    PKG_AND_EXE=$(ros2 pkg executables | grep $1 | fzf)
+    local PKG_AND_EXE=$(ros2 pkg executables | grep $1 | fzf)
     [[ -z "$PKG_AND_EXE" ]] && return
-    CMD=(ros2 run $PKG_AND_EXE)
+    local CMD=(ros2 run $PKG_AND_EXE)
     echo $CMD
     eval $CMD
     print -s rrun
@@ -22,7 +22,7 @@ function rrun {
 # Topics
 
 function rtlist {
-    CMD=(ros2 topic list)
+    local CMD=(ros2 topic list)
     echo $CMD
     $CMD
     print -s rtlist
@@ -30,7 +30,7 @@ function rtlist {
 }
 
 function rtecho {
-    TOPIC=$(ros2 topic list | fzf)
+    local TOPIC=$(ros2 topic list | fzf)
     [[ -z "$TOPIC" ]] && return
     CMD=(ros2 topic echo $TOPIC)
     echo $CMD
@@ -40,7 +40,7 @@ function rtecho {
 }
 
 function rtinfo {
-    TOPIC=$(ros2 topic list | fzf)
+    local TOPIC=$(ros2 topic list | fzf)
     [[ -z "$TOPIC" ]] && return
     CMD=(ros2 topic info -v $TOPIC)
     echo $CMD
@@ -52,7 +52,7 @@ function rtinfo {
 # Nodes
 
 function rnlist {
-    CMD=(ros2 node list)
+    local CMD=(ros2 node list)
     echo $CMD
     $CMD
     print -s rnlist
@@ -60,9 +60,9 @@ function rnlist {
 }
 
 function rninfo {
-    NODE=$(ros2 node list | fzf)
+    local NODE=$(ros2 node list | fzf)
     [[ -z "$NODE" ]] && return
-    CMD=(ros2 node info $NODE)
+    local CMD=(ros2 node info $NODE)
     echo $CMD
     $CMD
     print -s rninfo
@@ -71,16 +71,16 @@ function rninfo {
 
 # TODO: Not working
 function rnkill {
-    NODE_TO_KILL_RAW=$(ros2 node list | fzf)
+    local NODE_TO_KILL_RAW=$(ros2 node list | fzf)
     [[ -z "$NODE_TO_KILL_RAW" ]] && return
-    NODE_TO_KILL=(${NODE_TO_KILL_RAW//// })
+    local NODE_TO_KILL=(${NODE_TO_KILL_RAW//// })
     NODE_TO_KILL=${NODE_TO_KILL[-1]} # extract last word from node name
     NODE_TO_KILL=[${NODE_TO_KILL:0:1}]${NODE_TO_KILL:1}
     # The method used is to parse the PID and use kill <PID>.
     # If more than 1 PID is found, we abort to avoid killing other processes.
     # The parsing checks for any process with the string [/]$NODE_TO_KILL.
     # This can probably be optimized to always find the one node we are looking for.
-    PROC_NB=$(ps aux | grep [/]$NODE_TO_KILL | wc -l)
+    local PROC_NB=$(ps aux | grep [/]$NODE_TO_KILL | wc -l)
     if [ $PROC_NB -gt 1 ]; then
         echo "This node name matched with more than 1 process. Not killing"
         return
@@ -88,8 +88,8 @@ function rnkill {
         echo "No processes found matching this node name"
         return
     fi
-    PROC_PID=$(ps aux | grep [/]$NODE_TO_KILL | awk '{print $2}')
-    CMD=(kill $PROC_PID)
+    local PROC_PID=$(ps aux | grep [/]$NODE_TO_KILL | awk '{print $2}')
+    local CMD=(kill $PROC_PID)
     echo "Killing $NODE_TO_KILL_RAW with PID $PROC_PID"
     $CMD
     print -s rnlist
@@ -99,7 +99,7 @@ function rnkill {
 # Services
 
 function rslist {
-    CMD=(ros2 service list)
+    local CMD=(ros2 service list)
     echo $CMD
     $CMD
     print -s rslist
@@ -109,9 +109,9 @@ function rslist {
 # Parameters
 
 function rplist {
-    NODE=$(ros2 node list | fzf)
+    local NODE=$(ros2 node list | fzf)
     [[ -z "$NODE" ]] && return
-    CMD=(ros2 param list $NODE --param-type)
+    local CMD=(ros2 param list $NODE --param-type)
     echo $CMD
     $CMD
     print -s rplist
@@ -119,11 +119,11 @@ function rplist {
 }
 
 function rpget {
-    NODE=$(ros2 node list | fzf)
+    local NODE=$(ros2 node list | fzf)
     [[ -z "$NODE" ]] && return
-    PARAM=$(ros2 param list $NODE | fzf)
+    local PARAM=$(ros2 param list $NODE | fzf)
     [[ -z "$PARAM" ]] && return
-    CMD=(ros2 param get $NODE $PARAM)
+    local CMD=(ros2 param get $NODE $PARAM)
     echo $CMD
     $CMD
     print -s rpget
@@ -131,13 +131,13 @@ function rpget {
 }
 
 function rpset {
-    NODE=$(ros2 node list | fzf)
+    local NODE=$(ros2 node list | fzf)
     [[ -z "$NODE" ]] && return
-    PARAM=$(ros2 param list $NODE | fzf)
+    local PARAM=$(ros2 param list $NODE | fzf)
     [[ -z "$PARAM" ]] && return
     echo -n "value: "
     read VALUE
-    CMD=(ros2 param set $NODE $PARAM $VALUE)
+    local CMD=(ros2 param set $NODE $PARAM $VALUE)
     echo $CMD
     $CMD
     print -s rpset
