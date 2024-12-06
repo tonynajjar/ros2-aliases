@@ -39,6 +39,16 @@ function rtecho {
     print -s $CMD
 }
 
+function rthz {
+    local TOPIC=$(ros2 topic list | fzf)
+    [[ -z "$TOPIC" ]] && return
+    CMD=(ros2 topic hz $TOPIC)
+    echo $CMD
+    $CMD
+    print -s rthz
+    print -s $CMD
+}
+
 function rtinfo {
     local TOPIC=$(ros2 topic list | fzf)
     [[ -z "$TOPIC" ]] && return
