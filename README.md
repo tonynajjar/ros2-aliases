@@ -73,7 +73,7 @@ Zsh:
 | Command | Alias | Arguments |
 | --- | --- | --- |
 | `ros2 run tf2_tools view_frames` | `view_frames` | namespace of TF topic [Optional] |
-| `ros2 run tf2_ros tf2_echo` | `tf2_echo`| frame 1 [Required], frame 2 [Required], namespace of TF topic [Optional] |
+| `ros2 run tf2_ros tf2_echo` | `tf_echo`| frame 1 [Required], frame 2 [Required], namespace of TF topic [Optional] |
 
 ## Colcon
 
