@@ -227,6 +227,20 @@ function cbp {
     history -s $CMD
 }
 
+function cbs {
+    if [ $# -eq 0 ]; then
+        PACKAGE=$(colcon list -n | fzf)
+        [[ -z "$PACKAGE" ]] && return
+        local CMD="colcon build --symlink-install --packages-skip $PACKAGE"
+    else
+        local CMD="colcon build --symlink-install --packages-skip $@"
+    fi
+    echo $CMD
+    $CMD
+    history -s cbs $@
+    history -s $CMD
+}
+
 function cl {
     CMD="colcon list -n"
     echo $CMD

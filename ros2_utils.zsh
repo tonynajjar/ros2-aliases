@@ -226,6 +226,20 @@ function cbp {
     print -s $CMD
 }
 
+function cbs {
+    if [ $# -eq 0 ]; then
+        PACKAGE=$(colcon list -n | fzf)
+        [[ -z "$PACKAGE" ]] && return
+        CMD="colcon build --symlink-install --packages-skip $PACKAGE"
+    else
+        CMD="colcon build --symlink-install --packages-skip $@"
+    fi
+    echo $CMD
+    eval $CMD
+    print -s cbs $@
+    print -s $CMD
+}
+
 function cl {
     CMD=(colcon list -n)
     echo $CMD
