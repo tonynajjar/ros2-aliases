@@ -241,6 +241,42 @@ function cbs {
     history -s $CMD
 }
 
+function ct {
+    CMD="colcon test"
+    echo $CMD
+    $CMD
+    history -s ct $@
+    history -s $CMD
+}
+
+function ctp {
+    if [ $# -eq 0 ]; then
+        PACKAGE=$(colcon list -n | fzf)
+        [[ -z "$PACKAGE" ]] && return
+        local CMD="colcon test --packages-select $PACKAGE"
+    else
+        local CMD="colcon test --packages-select $@"
+    fi
+    echo $CMD
+    $CMD
+    history -s ctp $@
+    history -s $CMD
+}
+
+function cts {
+    if [ $# -eq 0 ]; then
+        PACKAGE=$(colcon list -n | fzf)
+        [[ -z "$PACKAGE" ]] && return
+        local CMD="colcon test --packages-skip $PACKAGE"
+    else
+        local CMD="colcon test --packages-skip $@"
+    fi
+    echo $CMD
+    $CMD
+    history -s cts $@
+    history -s $CMD
+}
+
 function cl {
     CMD="colcon list -n"
     echo $CMD
