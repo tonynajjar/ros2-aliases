@@ -82,6 +82,9 @@ Zsh:
 | `colcon build --symlink-install` | `cb` |
 | `colcon build --symlink-install --packages-select` | `cbp`| package 1 [Optional] ... package n [Optional] |
 | `colcon build --symlink-install --packages-skip` | `cbs`| package 1 [Optional] ... package n [Optional] |
+| `colcon test` | `ct` |
+| `colcon test --packages-select` | `ctp`| package 1 [Optional] ... package n [Optional] |
+| `colcon test --packages-skip` | `cts`| package 1 [Optional] ... package n [Optional] |
 | `colcon list` | `cl` |
 
 ## Rosdep

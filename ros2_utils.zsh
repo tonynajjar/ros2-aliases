@@ -240,6 +240,42 @@ function cbs {
     print -s $CMD
 }
 
+function ct {
+    CMD=(colcon test)
+    echo $CMD
+    $CMD
+    print -s ct
+    print -s $CMD
+}
+
+function ctp {
+    if [ $# -eq 0 ]; then
+        PACKAGE=$(colcon list -n | fzf)
+        [[ -z "$PACKAGE" ]] && return
+        CMD="colcon test --packages-select $PACKAGE"
+    else
+        CMD="colcon test --packages-select $@"
+    fi
+    echo $CMD
+    eval $CMD
+    print -s ctp $@
+    print -s $CMD
+}
+
+function cts {
+    if [ $# -eq 0 ]; then
+        PACKAGE=$(colcon list -n | fzf)
+        [[ -z "$PACKAGE" ]] && return
+        CMD="colcon test --packages-skip $PACKAGE"
+    else
+        CMD="colcon test --packages-skip $@"
+    fi
+    echo $CMD
+    eval $CMD
+    print -s cts $@
+    print -s $CMD
+}
+
 function cl {
     CMD=(colcon list -n)
     echo $CMD
